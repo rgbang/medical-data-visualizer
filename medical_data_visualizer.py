@@ -17,20 +17,10 @@ df['gluc'] = (df['gluc'] > 1).astype(int)
 # Draw Categorical Plot
 def draw_cat_plot():
     # Create DataFrame for cat plot using `pd.melt` using just the values from 'cholesterol', 'gluc', 'smoke', 'alco', 'active', and 'overweight'.
-    df_cat = pd.melt(df, id_vars = 'cardio', value_vars = [
-        'active',
-        'alco',
-        'cholesterol',
-        'gluc',
-        'overweight',
-        'smoke'])
+    df_cat = pd.melt(df, id_vars = 'cardio', value_vars = ['active', 'alco',  'cholesterol',  'gluc', 'overweight', 'smoke'])
+            
     # Draw the catplot with 'sns.catplot()'
-    pic = sns.catplot(
-        data = df_cat,
-        x = 'variable',
-        col = 'cardio',
-        hue = 'value',
-        kind = 'count')
+    pic = sns.catplot( data = df_cat,x = 'variable',col = 'cardio',hue = 'value',kind = 'count')       
     pic.set_axis_labels('variable', 'total')
     fig = pic.fig
 
@@ -58,15 +48,8 @@ def draw_heat_map():
     fig, ax = plt.subplots(figsize = (10, 10))
 
     # Draw the heatmap with 'sns.heatmap()'
-    sns.heatmap(
-        corr,
-        mask = mask,
-        annot = True,
-        center = 0.0,
-        vmin = -0.1,
-        vmax = 0.7,
-        fmt = '.1f')
-
+    sns.heatmap(corr,mask = mask,annot = True,center = 0.0,vmin = -0.1,vmax = 0.7,fmt = '.1f')
+        
     ## you may have to change the save location of the png, because not all devices save correctly
     # Do not modify the next two lines
     fig.savefig('heatmap.png')
